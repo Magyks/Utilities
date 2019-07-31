@@ -2,7 +2,7 @@ How to git:
 
 git pull https://github.com/Magyks/Utilities.git
 
-git add <filename>
+git add -A
 git commit -m "you're message here"
 git push https://github.com/Magyks/Utilities.git
 
