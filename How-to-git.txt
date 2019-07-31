@@ -1,0 +1,8 @@
+How to git:
+
+first pull to sync, from https://github.com/Magyks/Utilities.git
+
+then when ready, use git commit -m "you're message here" to 
+stage and prep the new files
+
+then use git push origin new-branch to push to new-branch
