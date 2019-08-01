@@ -35,7 +35,9 @@ def altstat(seed):
     ##and there but thoes change with the seed
     newseed = ""
     for i in range(len(seed)):
-        d = int(seed[(i+1)%12]) + int(seed[(i+2)%12])
+        ##if i add the next value after the consecutive, 
+        ##there is less of an even spread
+        d =int (seed[i])+ int(seed[(i+1)%12])
         newseed += str(d)
     return str(newseed)
 

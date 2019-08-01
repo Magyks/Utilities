@@ -57,8 +57,13 @@ class dungeon:
             total += int(self.seed[i])
         decision = float(total/108) % 1
 
-        x = int(self.seed) + 123456789976
-        self.seed = str(x)
+        newseed = ""
+        for i in range(len(self.seed)):
+            ##if i add the next value after the consecutive, 
+            ##there is less of an even spread
+            d =int (self.seed[i])+ int(self.seed[(i+1)%12])
+            newseed += str(d)
+        self.seed = str(newseed)
 
 
         """ val = int(self.seed[self.change]) +3
