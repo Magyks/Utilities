@@ -1,10 +1,14 @@
 How to git:
 
-git pull https://github.com/Magyks/Utilities.git
+By default the master branch will be fetched, to access a different branch place the branch name at the end.
+
+git pull https://github.com/Magyks/Utilities.git <master> <new-branch>
+
+To update the repository:
 
 git add -A
 git commit -m "you're message here"
-git push https://github.com/Magyks/Utilities.git
+git push https://github.com/Magyks/Utilities.git <master> <new-branch>
 
 will be pushed to working branch
 
