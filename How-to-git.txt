@@ -9,7 +9,8 @@ To update the repository:
 git add -A
 git commit -m "you're message here"
 git push https://github.com/Magyks/Utilities.git <master> <new-branch>
+git push https://github.com/Magyks/Utilities.git <master> <new-branch>
 
-will be pushed to working branch
+will be pushed to working branch 
 
 then use git push origin new-branch to push to new-branch
