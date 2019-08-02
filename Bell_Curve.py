@@ -48,9 +48,9 @@ def deci(seed):
         total += int(seed[i])
     decision = float(total/108) % 1
 
-    #x = addstat(seed)
+    x = addstat(seed)
     #x = multstat(seed)
-    x = altstat(seed)
+    #x = altstat(seed)
     #x = difstat(seed)
     return x,decision
 
@@ -63,7 +63,7 @@ seed  = 123456789876
 array = [0 for i in range(1000)]
 
 ##set some markers with 0.1 intervals to essentially graph the curve
-for i in range(10):
+for i in range(11):
     x = 100 + (500 *i / 10)
     y= height - 50
     pygame.draw.rect(screen,(255,255,255), [x,y ,3,3])
