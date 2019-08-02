@@ -52,8 +52,16 @@ def deci(seed):
     #x = multstat(seed)
     #x = altstat(seed)
     #x = difstat(seed)
+
+    fromfile()
+
     return x,decision
 
+def fromfile():
+    MyFile = open("results.txt","r")
+    for lines in MyFile:
+        print(MyFile.read)
+    pass
 
 width, height = 640, 480
 screen = pygame.display.set_mode((width, height))
