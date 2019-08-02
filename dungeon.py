@@ -16,11 +16,17 @@ class dungeon:
 
     change=0
     previous = "start"
+    flatseed = ""
+    curveseed = ""
 
     def __init__(self,width,height,seed,startpoint = 0):
         self.width  = width
         self.height = height
-        self.seed = str(seed)
+        self.flatseed = str(seed)
+        self.curveseed = str(seed)
+
+        maparray = [[ 0 for i in range(int(height/20)) ]for j in range (int(width/20))]
+
         if startpoint == 0:
             x = (int(self.seed) % (width/20) ) *20
             y = ((int(self.seed) / 3)  % (height / 20)) *20
@@ -56,27 +62,7 @@ class dungeon:
         for i in range(len(self.seed)):
             total += int(self.seed[i])
         decision = float(total/108) % 1
-
-        newseed = ""
-        for i in range(len(self.seed)):
-            ##if i add the next value after the consecutive, 
-            ##there is less of an even spread
-            d =int (self.seed[i])+ int(self.seed[(i+1)%12])
-            newseed += str(d)
-        self.seed = str(newseed)
-
-
-        """ val = int(self.seed[self.change]) +3
-        self.seed = list(self.seed)
-        self.seed[self.change] = val
-        self.seed[self.change] %=10
-        newseed = ""
-        for i in range(len(self.seed)):
-            newseed += str(self.seed [i])
-        self.seed = newseed
-        self.change += 5
-        self.change %= 12 """
-        print(self.seed,decision, total) 
+        self.updateseeds()
         ####################
 
         if  self.previous == "start":
@@ -109,6 +95,31 @@ class dungeon:
     
     def generatepath(self):
         pass
+
+    def updateseeds(self):
+        self.flatfreq()
+        self.curvefreq()
+
+    def flatfreq(self):
+        newseed = ""
+        for i in range(len(self.flatseed)):
+            ##if i add the next value after the consecutive, 
+            ##there is less of an even spread
+            d =int (self.flatseed[i])+ int(self.flatseed[(i+1)%12])
+            newseed += str(d)
+        self.flatseed = str(newseed)
+
+    def curvefreq(self):
+        val = int(self.curveseed[self.change]) +3
+        self.curveseed = list(self.seed)
+        self.curveseed[self.change] = val
+        self.curveseed[self.change] %=10
+        newseed = ""
+        for i in range(len(self.curveseed)):
+            newseed += str(self.curveseed [i])
+        self.curveseed = newseed
+        self.change += 5
+        self.change %= 12 
 
 seed = 123456789111 ##12 digit seed
 
