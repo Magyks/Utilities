@@ -34,12 +34,19 @@ def altstat(seed):
     ##this works really well , there are some gaps here 
     ##and there but thoes change with the seed
     newseed = ""
-    for i in range(len(seed)):
+    print(seed)
+    for i in range(12):
         ##if i add the next value after the consecutive, 
         ##there is less of an even spread
-        d =int (seed[i])+ int(seed[(i+1)%12])
+        try:
+            d =(int (seed[i])+ int(seed[(i+1)%12]))
+        except IndexError:
+            d = "0"
+        except:
+            d = (int (seed[i])+ int(seed[(i+1)%12]))
         newseed += str(d)
-    return str(newseed)
+    
+    return str(int(newseed)%999999999999)
 
 def deci(seed):
     seed = str(seed)

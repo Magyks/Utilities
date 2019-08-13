@@ -61,21 +61,12 @@ class dungeon:
         for i in range(len(self.seed)):
             ##if i add the next value after the consecutive, 
             ##there is less of an even spread
-            d =int (self.seed[i])+ int(self.seed[(i+1)%12])
+            d = (int (self.seed[i])+ int(self.seed[(i+1)%12]))%10
             newseed += str(d)
         self.seed = str(newseed)
 
+        #tests for a good hash are in bell_curve
 
-        """ val = int(self.seed[self.change]) +3
-        self.seed = list(self.seed)
-        self.seed[self.change] = val
-        self.seed[self.change] %=10
-        newseed = ""
-        for i in range(len(self.seed)):
-            newseed += str(self.seed [i])
-        self.seed = newseed
-        self.change += 5
-        self.change %= 12 """
         print(self.seed,decision, total) 
         ####################
 
