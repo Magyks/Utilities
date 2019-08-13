@@ -5,10 +5,10 @@ class htable:
         self.size=size
         self.array = [" " for i in range(size)] 
 
-    def add(self,data):
-        "returns 00 when data added sucessfully, returns 01 when the hash table is full"
-        index= hash(data)%self.size
-        print(index,hash(data))
+    def add(self,data,index = -1):
+        if index == -1:
+            index= hash(data)%self.size
+
         z=self.array[index]
         if z ==" ":
             self.array[index] = data
@@ -29,7 +29,6 @@ class htable:
 
     def find (self,data):
         index= hash(data)
-        print(index%self.size)
         z=self.array[index%self.size]
         results=[]
         if z ==" ":
@@ -63,7 +62,6 @@ class htable:
                 message=""
                 for i in range(len(results)):
                     message+=results[i][0]+" "
-                print(message)
                 deci = int(input("Enter index of record deletion  :"))
                 self.array[results[deci][1]] = " "
                 return "00"
@@ -76,6 +74,7 @@ class htable:
                 return "04"
 
     def errors(self,check):
+        "return messages"
         if check == "00":
             print("No error")
         elif check == "01":

@@ -1,47 +1,67 @@
-import vigenere
-generator =vigenere.cipher("E","ghost","helpmeimallalone")
-MyFile = open("C:\\Users\\44\\Documents\\A Level Work\\Database.txt","rt")
-SMile = []
-for lines in MyFile:
-    if lines.find("\n") == -1:
-        SMile.append(lines)
-    else:
-        SMile.append(lines[:len(lines)-1])
+import vigenere,Hashtable
+size = 1000
+
+table  = Hashtable.htable(size)
 
 full = False
 while full == False:
-    imput = str(input("Enter the person's sername  :"))
-    index = hash(imput)%1000
-    found = False
-    while found ==False:
-        results=[]
-        if SMile[index] = "0\n":
-            print("Sorry, that person does not exist.")
+    MyFile = open("C:\\Users\\44\\Documents\\A Level Work\\Database.txt","wt")
+    deci = str(input("Add, delete, find a data entry or quit?  :"))
+    if deci == "A":
+        imput = str(input("Input the person's surname  :"))
+        data = str(input("input the person's details to be encrypted.  :"))
+        data = vigenere.cipher("E",imput,data)
+        index = hash(imput)%size
+        table.add(str(hash(imput))+" "+data.output,index)
+    elif deci == "D":
+        imput = str(input("Enter the person's surname  :"))
+        ereturn = table.find(imput)
+        if len(ereturn) == 0:
+            print(f"No entry matches {imput}.")
+        elif len(ereturn)==1:
+            x=ereturn[0][0].find(" ")+1
+            if hash(imput) == ereturn[0][0][:x]:
+                table.delete(ereturn[0][1])
+            print(f"Entry for {imput} deleted.")
         else:
-            hvalue = hash(imput)
-            spacenotfound = True
-            i=0
-            while spacenotfound :
-                x= SMile[index+i].split(" ")
-                if x[0] != hvalue and str(x[0]) != "0\n"  :
-                    i+=1
-                elif x[0] == hvalue:
-                    index +=i
-                    spacenotfound =False
-                else:
-                    spacenotfound = False
+            print(f"There are multiple matches that match {imput}:")
+            checklist=[]
+            for i in range(len(ereturn)):
+                x=ereturn[i][0].find(" ")+1
+                if hash(imput)== ereturn[i][0][:x]:
+                    checklist.append([vigenere.cipher("D",imput,ereturn[i][0][x:]).output,ereturn[i][1]])
+            if len(checklist)>1 :
+                print(checklist)
+                num = int(input("Which data entry is to be deleted?  :"))
+                index = checklist[num][1]
+                table.delete(index)
+                print(f"Entry for {imput}, occurance number {index} deleted.")
+            elif len(checklist)==1:
+                index = checklist[0][1]
+                table.delete(index)
+                print(f"Entry for {imput} deleted.")
+            else:
+                print(f"No entry matches {imput}.")
 
-            if i == 1000
-            rvalue = False
-            i=0
-            while rvalue == False and i!=1000 :
-                x= SMile[index+i].split(" ")
-                if int(x[0]) == hvalue:
-                    results.append(SMile[index+i])
-                    i+=1
-                else:
-                    rvalue == True
+    elif deci =="F":
+        imput = str(input("Enter the person's surname  :"))
+        ereturn = table.find(hash(imput)%size)
+        if len(ereturn) == 0:
 
-            if len(results) != 0:
-                
-                
+            print("There are no people who meet you're search term. Remeber the searchterm\nonly looks for Surnames.")
+        elif len(ereturn)==1:
+            x=ereturn[0][0].find(" ")
+            print(imput + " "+ vigenere.cipher("D",imput,ereturn[0][0][x:]).output)
+        else:
+            print(f"There are multiple matches that match {imput}:")
+            for i in range(len(ereturn)):
+                x=ereturn[i][0].find(" ")
+                print(vigenere.cipher("D",imput,ereturn[i][0][x+1:]).output)
+    elif deci == "Q":
+        full = True
+    else:
+        print("Please input A for add, D for delete and F for find.")
+
+    for i in range(size):
+        MyFile.write(table.array[i]+"\n")
+    MyFile.close()
