@@ -30,11 +30,13 @@ def addstat(seed):
     #however there is still a large spike around 0.6
     return str(x)
 
+def hashing(seed):
+    return str(abs(hash(str(seed)))%999999999999)
+
 def altstat(seed):
     ##this works really well , there are some gaps here 
     ##and there but thoes change with the seed
     newseed = ""
-    print(seed)
     for i in range(12):
         ##if i add the next value after the consecutive, 
         ##there is less of an even spread
@@ -58,6 +60,8 @@ def deci(seed):
     #x = addstat(seed)
     #x = multstat(seed)
     x = altstat(seed)
+    x=hashing(altstat(seed))
+    #x=hashing(seed)
     #x = difstat(seed)
     return x,decision
 
